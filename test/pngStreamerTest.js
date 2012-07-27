@@ -1,7 +1,7 @@
 (function () {
   "use strict";
 
-  var PngStreamer = require('../')
+  var pngPlucker = require('../')
     , assert = require('assert')
     , fs = require('fs')
     , spawn = require('child_process').spawn
@@ -13,29 +13,28 @@
       if (err) {
         throw err;
       }
-      assert.equal(file.toString('hex'), data, "Unequal stuff in " + counter);
+      assert.equal(file.toString('binary'), data, "Unequal stuff in " + counter);
       if (counter === 2) {
         done();
       }
     };
   };
 
-  describe('pngStreamer', function() {
+  describe('pngPlucker', function() {
     it('correctly splits out several png files from a stream', function(done) {
-      var pngStreamer
-        , testFileStream
+      var testFileStream
         , timesCalled = 0
         ;
 
       timesCalled = 0;
       testFileStream = spawn('cat', ['test/testPngWith3Images.png']);
-      pngStreamer = new PngStreamer(testFileStream.stdout, function(err, data) {
+      pngPlucker(testFileStream.stdout, function(err, data) {
         var fileName;
         if (err) {
           throw err;
         }
         fileName = "test/" + individualImageFiles[timesCalled++];
-        fs.readFile(fileName, 'hex', compareFilesWithCounter(timesCalled, fileName, data, done));
+        fs.readFile(fileName, 'binary', compareFilesWithCounter(timesCalled, fileName, data, done));
       });
     });
   });

@@ -1,7 +1,6 @@
 (function () {
   "use strict";
   var fs = require('fs')
-    , stream = require('stream')
     , PNG_HEADER_BUF
     , PNG_HEADER_STRING
     , PngStreamer
@@ -10,19 +9,18 @@
   PNG_HEADER_BUF = new Buffer([0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A]);
   PNG_HEADER_STRING = PNG_HEADER_BUF.toString('binary');
 
-  PngStreamer =  (function () {
-    function PngStreamer(pngStream, cb) {
-      var self = this
+
+
+    function pngPlucker(stream, cb) {
+      var acc = ''
         ;
-      this.cb = cb;
-      this.acc = '';
-      pngStream.on('data', function(data) {
-        self.acc += data.toString('binary');
-        self.acc = self.searchForPng(self.acc, self.cb);
+      stream.on('data', function(data) {
+        acc += data.toString('binary');
+        acc = searchForPng(acc, cb);
       });
     }
 
-    PngStreamer.prototype.searchForPng = function(dataString, cb) {
+    function searchForPng(dataString, cb) {
       var files
         , loc
         , pngFile
@@ -39,8 +37,5 @@
       return this.searchForPng(PNG_HEADER_STRING + files.slice(2).join(PNG_HEADER_STRING), cb);
     };
 
-    return PngStreamer;
-  })();
-
-  module.exports = PngStreamer;
+  module.exports = pngPlucker;
 }());
