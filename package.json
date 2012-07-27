@@ -1,0 +1,20 @@
+{
+  "name": "png-streamer",
+  "version": "0.0.1",
+  "description": "Takes a stream of PNGs, like from image2pipe of ffmpeg, and emits the individual pngs from them.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node_modules/.bin/mocha test/*.js"
+  },
+  "repository": "",
+  "keywords": [
+    "ffmpeg",
+    "png",
+    "stream"
+  ],
+  "devDependencies": {
+    "mocha": "*"
+  },
+  "author": "Jamison Dance <jergason@gmail.com> (http://jamisondance.com)",
+  "license": "BSD"
+}
