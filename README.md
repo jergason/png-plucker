@@ -1,9 +1,9 @@
-# pngPlucker
+# png-plucker
 
 A little module for parsing PNGs from streams. Useful with ffmpeg using
 image2pipe, for example.
 
-`pngPlucker` exports a single function that takes a stream and a callback that
+`png-plucker` exports a single function that takes a stream and a callback that
 is called whenever a PNG is found in the stream. It just looks for the PNG file
 header, and assumes everything from a header to the next header is a single
 PNG, so if you have other data mixed in with PNGs you will probably get
@@ -12,13 +12,13 @@ weirdness.
 ## Installation
 
 ```bash
-npm install pngsFromStream
+npm install png-plucker
 ```
 
 ## Useage
 
 ```JavaScript
-var pngPlucker = require('pngsFromStream'),
+var pngPlucker = require('png-plucker'),
 spawn = require('child-process').spawn,
 fs = require('fs'),
 counter = 0,

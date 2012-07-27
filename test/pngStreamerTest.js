@@ -20,7 +20,7 @@
     };
   };
 
-  describe('pngPlucker', function() {
+  describe('png-plucker', function() {
     it('correctly splits out several png files from a stream', function(done) {
       var testFileStream
         , timesCalled = 0
