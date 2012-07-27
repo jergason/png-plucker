@@ -1,6 +1,6 @@
 {
   "name": "png-streamer",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Takes a stream of PNGs, like from image2pipe of ffmpeg, and emits the individual pngs from them.",
   "main": "index.js",
   "scripts": {

@@ -11,12 +11,12 @@
   PNG_HEADER_STRING = PNG_HEADER_BUF.toString('binary');
 
   PngStreamer =  (function () {
-    function PngStreamer(subprocess, cb) {
+    function PngStreamer(pngStream, cb) {
       var self = this
         ;
       this.cb = cb;
       this.acc = '';
-      subprocess.stdout.on('data', function(data) {
+      pngStream.on('data', function(data) {
         self.acc += data.toString('binary');
         self.acc = self.searchForPng(self.acc, self.cb);
       });

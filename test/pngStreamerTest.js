@@ -29,7 +29,7 @@
 
       timesCalled = 0;
       testFileStream = spawn('cat', ['test/testPngWith3Images.png']);
-      pngStreamer = new PngStreamer(testFileStream, function(err, data) {
+      pngStreamer = new PngStreamer(testFileStream.stdout, function(err, data) {
         var fileName;
         if (err) {
           throw err;
